@@ -1,0 +1,16 @@
+{
+  "name": "Lista de Favoritos",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Agrega elementos a una lista de favoritos",
+  "permissions": ["storage", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}
