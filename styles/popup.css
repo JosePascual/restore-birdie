@@ -1,0 +1,117 @@
+.popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    border-radius: 10px;
+    filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+    overflow: hidden;
+    margin: 0;
+}
+
+.popup-header {
+    padding: 1rem;
+    text-align: center;
+    background: #fff;
+    width: 100%;
+}
+
+.popup-header span {
+    display: block;
+    text-align: center;
+}
+
+.popup-header>.icon {
+    font-size: 45px;
+    margin-bottom: 5px;
+}
+
+.popup-header .text {
+    font-size: 14px;
+    color: #888;
+}
+
+.popup-advice {
+    border-top: 1px solid #d5d5d5;
+    padding: 1rem;
+    background: #efefef;
+}
+
+.popup .advice-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    padding: 1rem;
+    filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    border-radius: 10px;
+}
+
+.popup .logo {
+    width: 100px;
+}
+
+.popup .description {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.popup .description p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    color: #666;
+}
+
+.popup .description p:last-child {
+    margin-bottom: 0;
+}
+
+.popup .btn {
+    text-decoration: none;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    color: #ffab1a;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 11px;
+    height: 36px;
+    justify-content: center;
+    letter-spacing: .5px;
+    outline: none;
+    padding: 0 15px;
+    text-transform: uppercase;
+    filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+}
+
+.popup .btn:hover {
+    background-color: #ffab1a;
+    color: #fff;
+}
+
+.popup-footer {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    background: #fff;
+    width: 100%;
+    font-size: 12px;
+    font-style: italic;
+    color: #555;
+}
+
+.popup-footer a {
+    color: #ffad22;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.popup-footer span {
+    display: inline-block;
+    color: rgb(240, 72, 72);
+    margin: 0 0.2rem 0 0.07rem;
+}
