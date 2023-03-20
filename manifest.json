@@ -9,11 +9,6 @@
     "48": "./images/icon-48x48.png",
     "128": "./images/icon-128x128.png"
   },
-  "permissions": [
-    "activeTab",
-    "storage",
-    "tabs"
-  ],
   "action": {
     "default_popup": "./popup.html",
     "default_icons": {
