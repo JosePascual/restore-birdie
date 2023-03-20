@@ -1,12 +1,12 @@
 {
-  "name": "Lista de Favoritos",
+  "name": "Make Twitter Geat Again",
   "version": "1.0",
   "manifest_version": 3,
-  "description": "Agrega elementos a una lista de favoritos",
-  "permissions": ["storage", "tabs"],
-  "background": {
-    "service_worker": "background.js"
-  },
+  "description": "Mute tweets with a single click.",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*"],

@@ -2,7 +2,6 @@ let TW_TAB_ACTIVE = '';
 let TW_TAB_ACTIVE_WORDS = ['para-ti'];
 
 (async () => {
-
     // check every 5 seconds if the element is available
     // if it is, return the element and stop checking
     const waitForElm = (selector) => {
@@ -17,6 +16,13 @@ let TW_TAB_ACTIVE_WORDS = ['para-ti'];
         });
     };
 
+    const setTabStatusToBody = activeTab => {
+        const body = document.querySelector('body')
+        if (body) {
+            body.setAttribute('data-shity-btn', activeTab)
+        }
+    }
+
     const createShityBtn = (tweet) => {
         if(!tweet) return
         const button = document.createElement('button')
@@ -24,7 +30,6 @@ let TW_TAB_ACTIVE_WORDS = ['para-ti'];
         tweet.setAttribute('data-tweet', 'setted')
         button.classList.add('shitBtn')
         button.innerHTML = '💩'
-        button.style = 'background-color: transparent; border: none; cursor: pointer; font-size: 20px; margin-left: 10px;'
         // Add button inside navAction
         const navAction = tweet.querySelector('div[role="group"][id*="id__"]')
         if(navAction) navAction.appendChild(button)
@@ -43,6 +48,26 @@ let TW_TAB_ACTIVE_WORDS = ['para-ti'];
 
     //     return acc
     // }, {})
+
+    // Get Scripts
+    /*
+    const scripts = document.querySelectorAll('script[type="text/javascript"]:not([src])')
+    let contentScripts = null
+    if (scripts) {
+        scripts.forEach(script => {
+            if (script.innerText.includes('window.__INITIAL_STATE__') && script.innerText.includes('window.__META_DATA__')) {
+                contentScripts = script.innerText.split('};').filter(e => e).reduce((acc, value) => {
+                    const key = value.split('=')[0].replaceAll('window.', '')
+                    const content = value.split('=')[1] + '}'
+
+                    acc[key] = JSON.parse(content)
+
+                    return acc
+                }, {})
+            }
+        })
+    }
+    */
 
     // Add element on [role="navigation"]
     const menu = document.querySelector('[role="navigation"]')
@@ -88,6 +113,8 @@ let TW_TAB_ACTIVE_WORDS = ['para-ti'];
     // every second check if are new tweets
     const interval = setInterval(() => {
         TW_TAB_ACTIVE = document.querySelector('[role="tablist"] [role="tab"][aria-selected="true"]').innerText.toLowerCase().split(' ').join('-')
+
+        setTabStatusToBody(TW_TAB_ACTIVE_WORDS.includes(TW_TAB_ACTIVE))
         // get all tweets on the view that don't have the data-tweet attribute
         const newTweets = document.querySelectorAll('[role="region"] article:not([data-tweet])')
         if(newTweets.length === 0) return
@@ -107,7 +134,7 @@ let TW_TAB_ACTIVE_WORDS = ['para-ti'];
             const itemsDropdown = dropdown.querySelectorAll('div[role="menuitem"]')
             if (!itemsDropdown.length) return
             itemsDropdown.forEach(item => {
-                if (item.innerText.includes('No me interesa')) item.click()
+                if (item.innerText.toLowerCase().includes('no me interesa')) item.click()
             })
         }, 25)
     })
