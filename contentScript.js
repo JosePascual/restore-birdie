@@ -12,7 +12,7 @@ let TW_NOT_INTERESTED_WORDS = ['no me interesa', 'not interested'];
                     clearInterval(interval);
                     resolve(elm);
                 }
-            }, 500);
+            }, 200);
         });
     };
 
