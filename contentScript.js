@@ -1,4 +1,14 @@
-let TW_NOT_INTERESTED_WORDS = ['no me interesa', 'not interested'];
+let TW_NOT_INTERESTED_WORDS = [
+    'no me interesa',
+    'not interested',
+    'nicht interessiert',
+    "ne m'intéresse pas",
+    'não tenho interesse',
+    'non mi interessa',
+    'nie interesuje',
+    ' interes',
+    ' intéresse'
+];
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -25,13 +35,14 @@ const getActiveTab = () => {
     return firstTab && firstTab.getAttribute('aria-selected') === 'true';
 };
 
-const setTabStatusToBody = activeTab => {
+const setTabStatusToBody = (activeTab = false) => {
     const body = document.querySelector('body')
     if (body) body.setAttribute('data-shity-btn', activeTab)
 }
 
 const createShityBtn = (tweet) => {
     if (!tweet || tweet.querySelector('.shitBtn')) return;
+    if (document.URL !== 'https://twitter.com/home') return;
 
     const button = document.createElement('button');
     tweet.setAttribute('data-shit', 'shiteable');
@@ -40,13 +51,11 @@ const createShityBtn = (tweet) => {
 
     const navAction = tweet.querySelector('div[role="group"][id*="id__"]');
     if (navAction) navAction.appendChild(button);
-
-    button.addEventListener('click', handleShityBtnClick);
 }
 
 const handleShityBtnClick = async (e) => {
     const tweet = e.target.closest('article');
-    const btnDropdown = tweet.querySelector('[aria-haspopup="menu"][role="button"]');
+    const btnDropdown = tweet.querySelector('[aria-haspopup="menu"][role="button"][data-testid="caret"]');
     btnDropdown.click();
 
     setTimeout(() => {
@@ -72,10 +81,9 @@ const addBtnToTweets = () => {
 
 const observeTweets = () => {
     const observer = new MutationObserver((mutations) => {
-        mutations.forEach(() => {
-            setTabStatusToBody(getActiveTab());
-            addBtnToTweets();
-        });
+        const activeTabStatus = getActiveTab();
+        setTabStatusToBody(activeTabStatus);
+        mutations.forEach(() => addBtnToTweets());
     });
     observer.observe(document.body, {
         childList: true,
@@ -86,9 +94,15 @@ const observeTweets = () => {
 
 (async () => {
     await waitForElm('[role="region"] article');
-    setTabStatusToBody(getActiveTab());
+    const activeTabStatus = getActiveTab();
+    setTabStatusToBody(activeTabStatus);
+
     addBtnToTweets();
     const tweetsObserver = observeTweets();
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('shitBtn')) handleShityBtnClick(e);
+    })
 
     window.addEventListener('beforeunload', () => {
         tweetsObserver.disconnect();
