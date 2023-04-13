@@ -1,4 +1,4 @@
-.shitBtn {
+.shitBtn, .silenceBtn, .profileSilence {
     display: none;
     background-color: transparent;
     border: none;
@@ -7,8 +7,21 @@
     margin-left: 10px;
 }
 
-[data-shity-btn="true"] .shitBtn {
+[data-make-twitter-great-again="1"] .shitBtn, 
+[data-make-twitter-great-again] .silenceBtn,
+[data-profile="true"] .profileSilence {
     display: block;
+}
+
+[data-profile="true"] .profileSilence {
+    font-size: 28px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+}
+
+[data-make-twitter-great-again][data-pop-open="true"] [role="group"] > div > [role="menu"],
+[data-profile][data-pop-open="true"] [role="group"] > div > [role="menu"] {
+    opacity: 0;
 }
 
 .extensionConfigBtn {
@@ -23,7 +36,6 @@
     font-size: 20px;
     background-color: transparent;
     border-radius: 40px;
-    /* color: rgb(231, 233, 234) */
 }
 
 .extensionConfigBtn:hover {
