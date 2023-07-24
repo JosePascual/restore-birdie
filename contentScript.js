@@ -1,6 +1,17 @@
-const silencePath = 'path[d="M18 6.59V1.2L8.71 7H5.5C4.12 7 3 8.12 3 9.5v5C3 15.88 4.12 17 5.5 17h2.09l-2.3 2.29 1.42 1.42 15.5-15.5-1.42-1.42L18 6.59zm-8 8V8.55l6-3.75v3.79l-6 6zM5 9.5c0-.28.22-.5.5-.5H8v6H5.5c-.28 0-.5-.22-.5-.5v-5zm6.5 9.24l1.45-1.45L16 19.2V14l2 .02v8.78l-6.5-4.06z"]'
-const shitPath = 'path[d="M9.5 7c.828 0 1.5 1.119 1.5 2.5S10.328 12 9.5 12 8 10.881 8 9.5 8.672 7 9.5 7zm5 0c.828 0 1.5 1.119 1.5 2.5s-.672 2.5-1.5 2.5S13 10.881 13 9.5 13.672 7 14.5 7zM12 22.25C6.348 22.25 1.75 17.652 1.75 12S6.348 1.75 12 1.75 22.25 6.348 22.25 12 17.652 22.25 12 22.25zm0-18.5c-4.549 0-8.25 3.701-8.25 8.25s3.701 8.25 8.25 8.25 8.25-3.701 8.25-8.25S16.549 3.75 12 3.75zM8.947 17.322l-1.896-.638C7.101 16.534 8.322 13 12 13s4.898 3.533 4.949 3.684l-1.897.633c-.031-.09-.828-2.316-3.051-2.316s-3.021 2.227-3.053 2.322z"]'
-const moreProfilePath = 'path[d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"]'
+const originalLogo = `<svg 
+viewBox="0 0 24 24" 
+aria-hidden="true"
+class="r-1cvl2hr r-4qtqp9 r-yyyyoo r-16y2uox r-8kz0gk r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp"
+fill="#1d9bf0"
+style="color: #1d9bf0;"
+>
+<g>
+    <path
+        d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
+</g>
+</svg>`
+
+const faviconUrl = `data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJkSURBVHgB7VZBbtpQEH3zIW0WVYuXVaH4Bs0NSk4AOUFhEarskhMknIDsqkKlcIT0BNAT1D1B3ZJK3dmVuirwp/MhVmzAxiagKBJv9+ePZ97M/JkxsMMODwzChlD84FWQp3MxeCDHAhiumB+MJrr1+8Ryw3p/9+H4DctfIPCq49Xlw8Kv99YlMuB19885gy/i7llziwGfFFWJyR02XzSCuwiBUse7BlFVaz5LS8KQVkRXaXRJsqImfDjKSZBNyzEyFWFKVJ4KFbWLElUao6KbSk8i9TXgTPaorxTskPwOxa7/9baGt4zg8oQbNyfWYJlRU0/KUx9ZwNwYNq1ecFRzl18QpW0bB0Ks//KjV1uwlbuLJA3GxEdh5wb5yGEPl3qMd2xecYQHKnlFlVLX95kxYCFKGg5IlU2a0uLpCM68LEJA+sJ/Dm6Jy3aMjQIRakRUm+UuvfOp/X34iQSejeFo0Hdx4optG5uFH/R+GHNvANcm3VtwLs+Lvy2TRwhIOnrYHhysIuDKcCDwGbYAjglOzQt+HssElF6dvoNNOZeuCSbfSgIGMjILMo4/ExZf7TqghNLmlwm1gpSC2tmaLAZMvWGz0Iu7XpqBm2NrQNN5cD+Y5ZOTdZyok3RZMusZOJUN+QZrQFb0oQkG6xIIYHe8A03Unx/Ryd6jS2ctAsbxmFRVynGKlM5na5ePVkUe0p+h9MmraS2zXqYgmSWjOPtElHbLTVB3Q79gqQlMScxqXpeav0UWiGMmXKSNOpZAAPvKs/U/1MRoxRxl+5WD+psUy2D5IdmRVoWjnqDnLlkyO+zwaPAf1zXwZL751PUAAAAASUVORK5CYII=`
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -22,153 +33,24 @@ const waitForElm = (selector) => {
     });
 };
 
-const setTabStatusToBody = () => {
-    const body = document.querySelector('body')
-    if (!body || !document.querySelectorAll('[role="tablist"] [role="tab"]')) return
-    if (document.URL !== 'https://twitter.com/home') return;
+const setFavicon = () => {
+    const favicon = document.querySelector('link[rel="shortcut icon"]');
+    if (!favicon) return;
 
-    if (!Array.from(document.querySelectorAll('[role="tablist"] [role="tab"][data-index]')).length > 0) Array.from(document.querySelectorAll('[role="tablist"] [role="tab"]')).map((el, idx) => el.closest('div').setAttribute('data-index', idx + 1))
-
-    const selectedIndexElm = document.querySelector('[role="tablist"] [role="tab"][aria-selected="true"]')
-    if (selectedIndexElm) {
-        const parent = selectedIndexElm.closest('div')
-        if (parent) {
-            body.setAttribute('data-make-twitter-great-again', parent.getAttribute('data-index'))
-        }
-    }
+    if (favicon.getAttribute('href') === faviconUrl) return;
+    favicon.setAttribute('href', faviconUrl);
 }
 
-const createShityBtn = (tweet) => {
-    if (!tweet || tweet.querySelector('.shitBtn')) return;
-    if (document.URL !== 'https://twitter.com/home') return;
-
-    const button = document.createElement('button');
-    tweet.setAttribute('data-shit', true);
-    button.classList.add('shitBtn');
-    button.innerHTML = '💩';
-
-    const navAction = tweet.querySelector('div[role="group"][id*="id__"]');
-    if (navAction) navAction.appendChild(button);
-}
-
-const createSilenceBtn = tweet => {
-    if (!tweet || tweet.querySelector('.silenceBtn')) return;
-    if (document.URL !== 'https://twitter.com/home') return;
-
-    const button = document.createElement('button');
-    tweet.setAttribute('data-silence', true);
-    button.classList.add('silenceBtn');
-    button.innerHTML = '🤫';
-
-    const navAction = tweet.querySelector('div[role="group"][id*="id__"]');
-    if (navAction) navAction.appendChild(button);
-}
-
-const handleBtnClick = async (e, selector) => {
-    const tweet = e.target.closest('article');
-    document.querySelector('body').setAttribute('data-pop-open', true)
-
-    const btnDropdown = tweet.querySelector('[aria-haspopup="menu"][role="button"][data-testid="caret"]');
-    if (!btnDropdown) return
-
-    btnDropdown.click();
-
-    await sleep(5);
-    const dropdown = document.querySelector('[data-testid="Dropdown"]');
-    if (!dropdown) return;
-
-    const item = dropdown.querySelector(selector)
-    if (item) item.closest('[role]').click()
-
-    btnDropdown.click();
-
-    if (document.querySelector('body').getAttribute('data-make-twitter-great-again') !== "1" || document.querySelector('body').getAttribute('data-make-twitter-great-again') !== "2") tweet.remove()
-}
-
-const handleProfileBtnClick = async (e, selector) => {
-    const userActions = document.querySelector('[role="main"] [data-testid="userActions"]')
-    if (!userActions) return
-
-    document.querySelector('body').setAttribute('data-pop-open', true)
-
-    const path = userActions.querySelector(moreProfilePath);
-    if (!path) return
-    const btnDropdown = path.closest('div[dir]')
-    if (!btnDropdown) return
-
-    btnDropdown.click();
-
-    await sleep(5);
-    const dropdown = document.querySelector('[data-testid="Dropdown"]');
-    if (!dropdown) return;
-
-    const item = dropdown.querySelector(selector)
-    if (item) item.closest('[role]').click()
-
-    dropdown.remove()
-}
-
-const addBtnToTweets = () => {
-    const tweets = document.querySelectorAll('[role="region"] article:not([data-shit]):not([data-silence])');
-    if (tweets && tweets.length > 0) tweets.forEach(tweet => {
-        createShityBtn(tweet)
-        createSilenceBtn(tweet)
-    });
-}
-
-const addProfileSilenceBtn = () => {
-    const userActions = document.querySelector('[role="main"] [data-testid="userActions"]')
-    if (!userActions) return
-
-    const contentActions = userActions.parentElement
-    if (!contentActions || contentActions.getAttribute('data-silence') === 'true') return
-
-    const button = document.createElement('button');
-    contentActions.setAttribute('data-silence', true);
-    button.classList.add('profileSilence');
-    button.innerHTML = '🤫';
-
-    contentActions.insertBefore(button, contentActions.firstChild);
-}
-
-const isProfile = () => {
-    if (document.querySelector('head meta[content*="twitter://user?screen_name="]')) {
-        document.querySelector('body').setAttribute('data-profile', true)
-
-        addProfileSilenceBtn()
-    }
-    else document.querySelector('body').removeAttribute('data-profile')
-}
-
-const observeTweets = () => {
-    const observer = new MutationObserver((mutations) => {
-        setTabStatusToBody();
-        isProfile()
-        if (!document.querySelector('[data-make-twitter-great-again] [role="group"] > div > [role="menu"]')) document.querySelector('body').removeAttribute('data-pop-open')
-        mutations.forEach(() => addBtnToTweets());
-    });
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-    });
-    return observer;
+const setTwitterLogo = () => {
+    const locateLogo = document.querySelector('a[aria-label="Twitter"][role="link"] >  div');
+    if (!locateLogo) return;
+    if (locateLogo.getAttribute('data-logo') === 'original') return;
+    locateLogo.innerHTML = originalLogo;
+    locateLogo.setAttribute('data-logo', 'original');
 }
 
 (async () => {
-    await waitForElm('[role="region"] article');
-
-    setTabStatusToBody();
-    isProfile();
-    addBtnToTweets();
-
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('shitBtn')) handleBtnClick(e, shitPath);
-        if (e.target.classList.contains('silenceBtn')) handleBtnClick(e, silencePath);
-        if (e.target.classList.contains('profileSilence')) handleProfileBtnClick(e, silencePath);
-    })
-
-    const tweetsObserver = observeTweets();
-    window.addEventListener('beforeunload', () => {
-        tweetsObserver.disconnect();
-    });
+    await waitForElm('a[aria-label="Twitter"][role="link"]');
+    setFavicon()
+    setTwitterLogo();
 })();
