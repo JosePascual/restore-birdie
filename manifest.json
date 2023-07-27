@@ -1,6 +1,6 @@
 {
   "name": "Restore Birdie",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "description": "Just don't let them kill the birdie.",
   "icons": {
@@ -11,9 +11,7 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://twitter.com/*"
-      ],
+      "matches": ["https://twitter.com/*"],
       "js": ["contentScript.js"]
     }
   ]
