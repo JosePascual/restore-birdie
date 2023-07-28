@@ -1,18 +1,21 @@
 {
+  "manifest_version": 2,
   "name": "Restore Birdie",
-  "version": "1.1",
-  "manifest_version": 3,
+  "version": "1.0",
   "description": "Just don't let them kill the birdie.",
   "icons": {
-    "16": "./images/icon-16x16.png",
-    "32": "./images/icon-32x32.png",
-    "48": "./images/icon-48x48.png",
-    "128": "./images/icon-128x128.png"
+    "16": "images/icon-16x16.png",
+    "32": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png"
   },
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*"],
       "js": ["contentScript.js"]
     }
+  ],
+  "permissions": [
+    "<all_urls>"
   ]
 }
