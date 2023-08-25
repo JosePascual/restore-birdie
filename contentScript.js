@@ -58,6 +58,8 @@ const setFavicon = () => {
 
 const setTwitterLogo = () => {
   const locateLogo = document.querySelector(
+    'a[aria-label="X"][role="link"] > div'
+  ) || document.querySelector(
     'a[aria-label="Twitter"][role="link"] > div'
   );
   if (!locateLogo) return;
@@ -87,17 +89,6 @@ const setTitle = () => {
   document.querySelector('head > title').innerHTML = title.innerText.replace(' / X', ' / Twitter')
 }
 
-const observeTwitterChanges = () => {
-  const observer = new MutationObserver((mutations) => {
-    setTitle();
-    setTwitterLogo()
-  });
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
-  return observer;
-}
 
 const setLoadingScreen = () => {
   const placeholder = document.querySelector('#placeholder')
@@ -106,13 +97,70 @@ const setLoadingScreen = () => {
   placeholder.innerHTML = loadingBirdLogo
 }
 
+const setMainPostButton = () => {
+  const postButton = document.querySelector('a[href="/compose/tweet"]')
+  if (!postButton) return
+
+  const text = postButton.querySelector('div > span > div > div > span > span')
+  if (!text) return
+
+  text.innerText = 'Tweet'
+}
+
+const setTweetPostButton = async () => {
+  await waitForElm('[data-testid="tweetButtonInline"]');
+  const postButton = document.querySelector('[data-testid="tweetButtonInline"]')
+
+  if (!postButton) return
+
+  if (postButton.getAttribute('data-locate')) return
+
+  const text = postButton.querySelector('div > span > span')
+  if (!text) return
+
+  text.innerText = 'Tweet'
+  postButton.setAttribute('data-locate', 'true')
+}
+
+const setTweetPostModal = async () => {
+  const modal = document.querySelector('[aria-labelledby="modal-header"]')
+  if (!modal) return
+
+  const modalBtn = modal.querySelector('[data-testid="tweetButton"]')
+  if (!modalBtn) return
+
+  if (modalBtn.getAttribute('data-locate')) return
+
+  const text = modalBtn.querySelector('div > span > span')
+  if (!text) return
+
+  text.innerText = 'Tweet all'
+  modalBtn.setAttribute('data-locate', 'true')
+}
+
+const observeTwitterChanges = () => {
+  const observer = new MutationObserver((mutations) => {
+    setTitle();
+    setTwitterLogo()
+    setTweetPostButton()
+    setTweetPostModal()
+  });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+  return observer;
+}
+
 (async () => {
   setLoadingScreen()
-  await waitForElm('a[aria-label="Twitter"][role="link"]');
+  await waitForElm('a[aria-label="X"][role="link"]');
   setFavicon();
   setTitle();
   setTwitterLogo();
-
+  setMainPostButton()
+  setTweetPostButton()
+  setTweetPostModal()
   const twitterObserve = observeTwitterChanges();
   window.addEventListener('beforeunload', () => {
     twitterObserve.disconnect();
