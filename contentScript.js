@@ -183,7 +183,7 @@ const observeTwitterChanges = () => {
   setFavicon();
   setTitle();
   setTwitterLogo();
-  setHouseBirdLogo()
+  // setHouseBirdLogo()
   setMainPostButton()
   setTweetPostButton()
   setTweetPostModal()
